@@ -1,12 +1,12 @@
 from .models import Resourse
 from rest_framework import serializers
-from booking.serializers import BookingSerializer
 
 
 class ResourseSerializer(serializers.HyperlinkedModelSerializer):
     """Класс для сериализации модели резервируевого объекта"""
 
-    booking = BookingSerializer(many=True, read_only=True)
+    booking = serializers.HyperlinkedRelatedField(
+        many=True, view_name='booking-detail', read_only=True)
 
     class Meta:
         model = Resourse
